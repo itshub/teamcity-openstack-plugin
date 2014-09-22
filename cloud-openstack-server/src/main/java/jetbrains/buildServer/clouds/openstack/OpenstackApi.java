@@ -80,14 +80,6 @@ public class OpenstackApi {
         return null;
     }
 
-    public String getNetworkIdByName(String name) {
-        List<? extends Network> networks = neutronApi.getNetworkApiForZone(zone).listInDetail().concat().toList();
-        for (Network network: networks) {
-            if (network.getName().equals(name)) return network.getId();
-        }
-        return null;
-    }
-
     public ServerApi getNovaApi() {
         return novaApi.getServerApiForZone(zone);
     }

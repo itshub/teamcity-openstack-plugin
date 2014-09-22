@@ -47,17 +47,14 @@ public class OpenstackCloudClient extends BuildServerAdapter implements CloudCli
             final String flavorName = entry.getValue().get("flavor").toString().trim();
             final String securityGroupName = entry.getValue().get("security_group").toString().trim();
             final String keyPair = entry.getValue().get("key_pair").toString().trim();
-            final String networkName = entry.getValue().get("network").toString().trim();
 
-            String networkId = openstackApi.getNetworkIdByName(networkName);
             CreateServerOptions options = new CreateServerOptions()
                     .keyPairName(keyPair)
-                    .securityGroupNames(securityGroupName)
-                    .networks(networkId);
+                    .securityGroupNames(securityGroupName);
 
             LOG.debug(String.format(
-                    "Adding cloud image: imageName=%s, openstackImageName=%s, flavorName=%s, securityGroupName=%s, keyPair=%s, networkName=%s, networkId=%s",
-                    imageName, openstackImageName, flavorName, securityGroupName, keyPair, networkName, networkId
+                    "Adding cloud image: imageName=%s, openstackImageName=%s, flavorName=%s, securityGroupName=%s, keyPair=%s",
+                    imageName, openstackImageName, flavorName, securityGroupName, keyPair
             ));
 
             final OpenstackCloudImage image = new OpenstackCloudImage(
